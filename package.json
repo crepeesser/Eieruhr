@@ -1,0 +1,50 @@
+{
+  "name": "eieruhr",
+  "version": "0.0.2",
+  "description": "eine eieruhr",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "build": {
+    "appId": "eieruhr",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "crepeesser",
+        "repo": "Eieruhr"
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "egg.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "installerIcon": "egg.ico",
+      "uninstallerIcon": "egg.ico",
+      "uninstallDisplayName": "eieruhr",
+      "license": "LICENSE",
+      "allowToChangeInstallationDirectory": false
+    },
+    "mac": {
+      "category": "your.app.category.type",
+      "target": [
+        "zip",
+        "dmg"
+      ]
+    }
+  },
+  "author": "niggel2_0",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^17.1.1"
+  },
+  "dependencies": {
+    "electron-log": "^4.4.6",
+    "electron-updater": "^4.6.5"
+  }
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eieruhr</title>
+
+    <style>
+        .background-dark {
+            background-color: #262626;
+        }
+        
+        .center {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .margin-top {
+            margin-top: 100px;
+        }
+        
+        .timer {
+            font-size: 60px;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+
+    <script>
+        let alarm = new Audio('alarm.mp3');
+        let timerStarted = false;
+
+        function startTimer() {
+            if (!timerStarted) {
+                let startTime = new Date().getTime();
+                let fiveMinutes = 1000 * 60 * 5;
+                let endTime = startTime + fiveMinutes;
+                start.innerHTML = ''
+                let inTimerStarted = true 
+                let soundPlayed = false;
+
+
+                setInterval(function() {
+                    if(!inTimerStarted) return
+                    let timeLeft = endTime - new Date().getTime();
+
+
+                    if (timeLeft > 0) {
+                        soundPlayed = false
+                        let minutes = timeLeft / (1000 * 60);
+                        minutes = Math.floor(minutes);
+                        let seconds = (timeLeft / 1000) % 60;
+                        seconds = Math.round(seconds);
+                        seconds = ('0' + seconds).slice(-2);
+                        let text = '0'  +  minutes  +  ' : '  +  seconds;
+                        timer.innerHTML = text;
+                    } else {
+                        if(!soundPlayed)alarm.play().then(()=>{soundPlayed = true})
+                        start.innerHTML = '<img onclick="restartTimer()" src="img/rbutn.png">'
+                        timer.innerHTML = '00 : 00';
+                        inTimerStarted = false
+                        timerStarted = false
+                    }
+                }, 1000);
+                timerStarted = true;
+            }
+        }
+
+        function restartTimer() {
+            if(timerStarted) return start.innerHTML = ''
+            timerStarted = false            
+            timer.innerHTML = '05 : 00'
+            start.innerHTML = '<img onclick="restartTimer()" src="img/rbutn.png">'
+            startTimer()
+        }
+    </script>
+
+</head>
+
+<body class="background-dark">
+
+
+    <div class="center margin-top">
+        <img src="img/egg.png">
+    </div>
+
+
+    <div class="center margin-top timer" id="timer">05 : 00</div>
+
+
+    <div class="center margin-top timer" id= "start">
+        <img onclick="startTimer()" src="img/button.png">
+    </div>
+</body>
+
+</html>
